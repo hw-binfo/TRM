@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MB lab TRM Ingredient search tool</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0c1757;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .page-header img {
+      height: 94px;
+      border-radius: 6px;
+    }
+
+    h1 {
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      color: #333;
+      flex-direction: column;
+    }
+
+    .card h2 {
+      padding: 1rem 1.25rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-bottom: 1px solid #eee;
+    }
+
+    .card iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    .instructions {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      padding: 1rem 1.25rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .instructions code {
+      background: #f0f0f0;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    .click-hint {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #999;
+      margin-left: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-header">
+    <img src="image/MB Lab logo.png" alt="MB Lab logo">
+    <h1>TRM - Ingredient search tool</h1>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Scatter Plot</h2>
+      <iframe src="plots/scatter.html" loading="lazy"></iframe>
+    </div>
+    <div class="card">
+      <h2>MB LAB Ingredients by Efficacy <span class="click-hint">Click a bar to see ingredients</span></h2>
+      <iframe src="plots/barchart.html" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- <div class="instructions">
+    <strong>Usage:</strong>
+    <ol>
+      <li>Edit <code>generate_plots.R</code> — set <code>CSV_PATH</code> and column names to match your data.</li>
+      <li>Run <code>Rscript generate_plots.R</code></li>
+      <li>Open this file (<code>index.html</code>) in a browser.</li>
+    </ol>
+  </div> -->
+</body>
+</html>
