@@ -90,6 +90,26 @@
       color: #999;
       margin-left: 0.5rem;
     }
+
+    .actions {
+      max-width: 1400px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-register {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: #4a6cf7;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-register:hover { background: #3a5ae0; }
   </style>
 </head>
 <body>
@@ -107,6 +127,10 @@
       <h2>MB LAB Ingredients by Efficacy <span class="click-hint">Click a bar to see ingredients</span></h2>
       <iframe src="plots/barchart.html" loading="lazy"></iframe>
     </div>
+  </div>
+
+  <div class="actions">
+    <a href="register.html" class="btn-register">Register new ingredient</a>
   </div>
 
   <!-- <div class="instructions">
