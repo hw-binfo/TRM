@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register New Ingredient</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0c1757;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #a0b4ff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: #fff; }
+    .back-btn::before { content: "\2190"; font-size: 1.1em; }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      color: #333;
+      padding: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      color: #333;
+    }
+
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input[type="text"]:focus { border-color: #4a6cf7; }
+
+    .form-group select {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    .form-group select:focus { border-color: #4a6cf7; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 1.25rem 0;
+    }
+
+    .efficacy-section label.section-title {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+      color: #333;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #e0e3eb;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      font-size: 0.88rem;
+      user-select: none;
+    }
+    .checkbox-item:hover { background: #f0f3ff; border-color: #b0c0f0; }
+    .checkbox-item input[type="checkbox"] {
+      accent-color: #4a6cf7;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .checkbox-item.checked {
+      background: #eef1ff;
+      border-color: #4a6cf7;
+    }
+
+    .btn-submit {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1.5rem;
+      background: #4a6cf7;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: #3a5ae0; }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #333;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      z-index: 100;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">Back to Dashboard</a>
+
+    <div class="header">
+      <h1>Register New Ingredient</h1>
+    </div>
+
+    <div class="card">
+      <form id="register-form">
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="Bio">Bio</option>
+            <option value="Complex">Complex</option>
+            <option value="Natural">Natural</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ingredient-name">Ingredient Name</label>
+          <input type="text" id="ingredient-name" placeholder="e.g. Absolute S" required>
+        </div>
+
+        <div class="form-group">
+          <label for="inci-name">INCI Name</label>
+          <input type="text" id="inci-name" placeholder="e.g. Spermidine" required>
+        </div>
+
+        <hr class="divider">
+
+        <div class="efficacy-section">
+          <label class="section-title">Efficacy (select all that apply)</label>
+          <div class="checkbox-grid" id="efficacy-checkboxes"></div>
+        </div>
+
+        <button type="submit" class="btn-submit">Complete register</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Load data to read efficacy column names dynamically -->
+  <script src="data/data.js"></script>
+  <script>
+    // Build efficacy checkboxes from META_DATA
+    var efficacyCols = META_DATA.efficacy_columns || [];
+    var grid = document.getElementById('efficacy-checkboxes');
+
+    efficacyCols.forEach(function(eff) {
+      var label = document.createElement('label');
+      label.className = 'checkbox-item';
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.name = 'efficacy';
+      cb.value = eff;
+
+      var span = document.createElement('span');
+      span.textContent = eff;
+
+      label.appendChild(cb);
+      label.appendChild(span);
+      grid.appendChild(label);
+
+      // Toggle visual state
+      cb.addEventListener('change', function() {
+        label.classList.toggle('checked', cb.checked);
+      });
+    });
+
+    // Handle form submission
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var category = document.getElementById('category').value;
+      var name = document.getElementById('ingredient-name').value.trim();
+      var inci = document.getElementById('inci-name').value.trim();
+
+      var checked = [];
+      document.querySelectorAll('input[name="efficacy"]:checked').forEach(function(cb) {
+        checked.push(cb.value);
+      });
+
+      // Build the ingredient object (for future use)
+      var ingredient = {
+        "Category": category,
+        "Ingredient name": name,
+        "INCI Name": inci
+      };
+      efficacyCols.forEach(function(eff) {
+        ingredient[eff] = checked.indexOf(eff) >= 0 ? "O" : "-";
+      });
+
+      console.log("New ingredient (not yet saved):", ingredient);
+      showToast("Registration submitted (saving will be enabled later)");
+
+      // Reset form
+      this.reset();
+      document.querySelectorAll('.checkbox-item.checked').forEach(function(el) {
+        el.classList.remove('checked');
+      });
+    });
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 3000);
+    }
+  </script>
+</body>
+</html>
